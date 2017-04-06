@@ -1,2 +1,2 @@
 i have a pen.
-i have a apple.
+i have a pear.
