@@ -179,7 +179,7 @@ private:
 public:
 	MyCircle();
 	MyCircle(int x, int y, int r, Screen* screen);
-	MyCircle(const MyCircle &);   
+	//MyCircle(const MyCircle &);   
 
 	void setCenter(int x, int y) {
 		x_ = x;
