@@ -106,6 +106,15 @@ public:
 	void setType(string string) {
 		type_ = string;
 	}
+	int getR() {
+		return R_;
+	}
+	int getG() {
+		return G_;
+	}
+	int getB() {
+		return B_;
+	}
 	virtual void Draw() = 0;
 	void showShape();
 };
@@ -143,7 +152,7 @@ public:
 		setColor(255, 255, 255);
 		setType("myrectangle");
 	}
-	void showScreen();
+
 	void setCoordinations(int x1, int y1, int x2, int y2) {
 		x1_ = x1;
 		y1_ = y1;
@@ -156,30 +165,22 @@ public:
 		cout << x1_ << " " << y1_ << " " <<
 			this->getWidth() << " " <<
 			this->getHeight() << endl;
-		cout << R_ << " " << G << " " << B << endl;
+		//cout << getR() << " " << getG() << " " << getB() << endl;
 	}
-	void setColor(int R, int G, int B);
+	
 };
-void MyRectangle::setColor(int R, int G, int B) {
-	this->R = R;
-	this->G = G;
-	this->B = B;
-}
-void MyRectangle::showScreen() {
-	cout << screen_->getWidth() << " " << screen_->getHeight() << endl;
-}
 
-class MyCircle {
+
+
+class MyCircle :public MyShape {
 private:
 	int x_, y_, r_;
-	int R, G, B;
-	
 
 public:
 	MyCircle();
 	MyCircle(int x, int y, int r, Screen* screen);
 	MyCircle(const MyCircle &);   
-	void setColor(int R, int G, int B);
+
 	void setCenter(int x, int y) {
 		x_ = x;
 		y_ = y;
@@ -188,45 +189,40 @@ public:
 		r_ = r;
 	}
 	void Draw() {
+		showShape();
 		cout << x_ << " " << y_ << " " << r_ << endl;
-		cout << R << " " << G << " " << B << endl;
+		//cout << getR() << " " << getG() << " " << getB() << endl;
 	}
-	void showScreen() {
-		cout << screen_->getWidth() << " " << screen_->getHeight() << endl;
-	}
+
 	
 };
 MyCircle::MyCircle() {
 	x_ = 200;
 	y_ = 200;
 	r_ = 100;
-	R = G = B = 255;
-	cout << "mycircle" << endl;
+	setType("mycircle");
+	setColor(255, 255, 255);
+
 }
 MyCircle::MyCircle(int x, int y, int r, Screen* screen) {
 	x_ = x;
 	y_ = y;
 	r_ = r;
-	screen_ = screen;
-	R = G = B = 255;
-	cout << "mycircle" << endl;
+	setScreen(*screen);
+	setType("mycircle");
+	setColor(255, 255, 255);
 }
-MyCircle::MyCircle(const MyCircle &mycircle) {
-	x_ = mycircle.x_;
-	y_ = mycircle.y_;
-	r_ = mycircle.r_;
-	R = mycircle.R;
-	G = mycircle.G;
-	B = mycircle.B;
-	screen_ = mycircle.screen_;
-	cout << "copy mycircle" << endl;
+//MyCircle::MyCircle(const MyCircle &mycircle) {
+//	x_ = mycircle.x_;
+//	y_ = mycircle.y_;
+//	r_ = mycircle.r_;
+//	R = mycircle.R;
+//	G = mycircle.G;
+//	B = mycircle.B;
+//	screen_ = mycircle.screen_;
+//	cout << "copy mycircle" << endl;
+//}
 
-}
-void MyCircle::setColor(int R, int G, int B) {
-	this->R = R;
-	this->G = G;
-	this->B = B;
-}
 
 //-----------------------------------------------------------------------------
 
