@@ -16,7 +16,7 @@ public:
 	int getHeight() {
 		return height;
 	}
-	static Screen* getInstance(int width = 640, int height = 480); //注意是静态！！题目要求！！这导致主函数中非静态成员引用必须与特定对象相对的问题！
+	static Screen* getInstance(int width = 640, int height = 480);
 	static void deleteInstance();
 	static int isSimpleObj(int objNum);
 

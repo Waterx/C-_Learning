@@ -18,7 +18,7 @@ public:
 	int getHeight() {
 		return height;
 	}
-	static Screen* getInstance(int width = 640, int height = 480); //注意是静态！！题目要求！！这导致主函数中非静态成员引用必须与特定对象相对的问题！
+	static Screen* getInstance(int width = 640, int height = 480);
 	static void deleteInstance();
 	static int isSimpleObj(int objNum);
 
@@ -49,7 +49,7 @@ Screen::Screen(int newWidth, int newHeight) {
 }
 Screen::~Screen() {
 	cout << leave << endl;
-	Screen::objNum--;       //析构函数里要记得减计数器！！
+	Screen::objNum--;      
 }
 int Screen::exitWhenInvalidScreen(int width, int height) {
 	if (width > 0 && height > 0 && width <= 1000 && height <= 1000)
@@ -151,7 +151,7 @@ private:
 public:
 	MyCircle();
 	MyCircle(int x, int y, int r, Screen* screen);
-	MyCircle(const MyCircle &);   //vs里加不加const都可以运行，dev中不加const会error，why？
+	MyCircle(const MyCircle &);   //vs里加不加const都可以运行，dev中不加const会error，why？答案见笔记本第五单元
 	void setColor(int R, int G, int B);
 	void setCenter(int x, int y) {
 		x_ = x;
