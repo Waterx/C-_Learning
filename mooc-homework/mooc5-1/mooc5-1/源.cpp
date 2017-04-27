@@ -27,7 +27,6 @@ public:
 		return height;
 	}
 	static Screen* getInstance(int width = 640, int height = 480); //注意是静态！！题目要求！！这导致主函数中非静态成员引用必须与特定对象相对的问题！
-	static int isSimpleObj(int objNum);
 private:
 	int width;
 	int height;
@@ -35,20 +34,21 @@ private:
 	string enter;
 	string leave;
 	static Screen* instance;
-	static int objNum;
+	
 };
 
-int Screen::objNum = 0;
+
 Screen* Screen::instance = 0;
 Screen::Screen(int newWidth, int newHeight){
-	if (isSimpleObj(Screen::objNum)) {
+	if (Screen::instance == 0) {
 		width = newWidth;
 		height = newHeight;
 		enter = "enter screen";
 		leave = "leave screen";
 		cout << enter << endl;
 		exitWhenInvalidScreen(width, height);
-		Screen::objNum++;
+		Screen::instance++;
+		
 	}
 }
 int Screen::exitWhenInvalidScreen(int width, int height) {
@@ -70,14 +70,7 @@ Screen* Screen::getInstance(int width, int height) {
 		return instance;
 	}
 }
-int Screen::isSimpleObj(int objNum) {
-	if (objNum == 0) {
-		return 1;
-	}
-	else {
-		return 0;
-	}
-}
+
 //-----------------------------------------------------------------------------
 int main() {
 	int width, height;
