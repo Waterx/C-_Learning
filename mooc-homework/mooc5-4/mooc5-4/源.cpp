@@ -20,8 +20,6 @@ public:
 	}
 	static Screen* getInstance(int width = 640, int height = 480);
 	static void deleteInstance();
-	static int isSimpleObj(int objNum);
-
 
 private:
 	Screen(int newWidth, int newHeight);
@@ -31,25 +29,25 @@ private:
 	string enter;
 	string leave;
 	static Screen* instance;
-	static int objNum;
+
 };
 
-int Screen::objNum = 0;
+
 Screen* Screen::instance = 0;
 Screen::Screen(int newWidth, int newHeight) {
-	if (isSimpleObj(Screen::objNum)) {
+	if (Screen::instance == 0) {
 		width = newWidth;
 		height = newHeight;
 		enter = "enter screen";
 		leave = "leave screen";
 		cout << enter << endl;
 		exitWhenInvalidScreen(width, height);
-		Screen::objNum++;
+		Screen::instance++;
 	}
 }
 Screen::~Screen() {
 	cout << leave << endl;
-	Screen::objNum--;      
+	Screen::instance--;
 }
 int Screen::exitWhenInvalidScreen(int width, int height) {
 	if (width > 0 && height > 0 && width <= 1000 && height <= 1000)
@@ -74,14 +72,7 @@ void Screen::deleteInstance() {
 	delete instance;
 	instance = 0;
 }
-int Screen::isSimpleObj(int objNum) {
-	if (objNum == 0) {
-		return 1;
-	}
-	else {
-		return 0;
-	}
-}
+
 
 class MyRectangle {
 private:
