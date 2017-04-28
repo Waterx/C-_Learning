@@ -1,3 +1,6 @@
+
+//mooc6-3
+
 #include"graphics.h"
 #include<cstdlib>
 #include<string>
@@ -18,7 +21,7 @@ public:
 	}
 	static Screen* getInstance(int width = 640, int height = 480);
 	static void deleteInstance();
-	static int isSimpleObj(int objNum);
+
 
 
 private:
@@ -29,13 +32,11 @@ private:
 	const char* enter;
 	const char* leave;
 	static Screen* instance;
-	static int objNum;
 };
 
-int Screen::objNum = 0;
 Screen* Screen::instance = 0;
 Screen::Screen(int newWidth, int newHeight) {
-	if (isSimpleObj(Screen::objNum)) {
+	if (Screen::instance == 0) {
 		width = newWidth;
 		height = newHeight;
 		initgraph(width,height);
@@ -43,12 +44,12 @@ Screen::Screen(int newWidth, int newHeight) {
 		leave = "leave screen";
 		xyprintf(10, 10, "%s", enter);
 		exitWhenInvalidScreen(width, height);
-		Screen::objNum++;
+		Screen::instance++;
 	}
 }
 Screen::~Screen() {
 	xyprintf(10, 10, "leave");
-	Screen::objNum--;       
+	Screen::instance--;       
 }
 int Screen::exitWhenInvalidScreen(int width, int height) {
 	if (width > 0 && height > 0 && width <= 1000 && height <= 1000)
@@ -73,20 +74,12 @@ void Screen::deleteInstance() {
 	delete instance;
 	instance = 0;
 }
-int Screen::isSimpleObj(int objNum) {
-	if (objNum == 0) {
-		return 1;
-	}
-	else {
-		return 0;
-	}
-}
 
 class MyShape {
 private:
 	int R_, G_, B_;
 	Screen* screen_;
-	char* type_;
+	const char* type_;
 public:
 	MyShape(Screen* screen = 0) {
 		R_ = G_ = B_ = 255;
@@ -101,7 +94,7 @@ public:
 	void setScreen(Screen& screen) {
 		screen_ = &screen;
 	}
-	void setType(char* string) {
+	void setType(const char* string) {
 		type_ = string;
 	}
 	int getR() {
