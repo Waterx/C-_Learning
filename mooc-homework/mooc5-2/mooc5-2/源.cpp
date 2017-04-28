@@ -18,7 +18,6 @@ public:
 	}
 	static Screen* getInstance(int width = 640, int height = 480);
 	static void deleteInstance();
-
 private:
 	Screen(int newWidth, int newHeight);
 	int width;
@@ -29,8 +28,6 @@ private:
 	static Screen* instance;
 
 };
-
-
 Screen* Screen::instance = 0;
 Screen::Screen(int newWidth, int newHeight) {
 	if (Screen::instance == 0) {
