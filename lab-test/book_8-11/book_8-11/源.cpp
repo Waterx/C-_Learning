@@ -107,6 +107,7 @@ int main() {
 	Shape* shape1 = new Rectangle(5, 4);
 	Rectangle* rectangle1 = new Rectangle(6, 7);
 	rectangle1 = typeid(Rectangle)(shape1);
+	//test for github
 	
 
 //----------------------------------------
