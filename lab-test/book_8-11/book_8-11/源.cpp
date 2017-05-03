@@ -1,8 +1,9 @@
 
-//8-11
+//book_8-11
 
 #include<iostream>
 #include<string>
+#include<typeinfo>
 using namespace std;
 
 class Shape {
@@ -14,7 +15,7 @@ public:
 	}
 	virtual double getArea() = 0;
 	virtual double getPerim() = 0;
-	int getVertexCount() const;
+	virtual int getVertexCount() const;
 };
 int Shape::getVertexCount() const {
 	if (type == "Square") {
@@ -28,6 +29,9 @@ int Shape::getVertexCount() const {
 	}
 	else if (type == "Shape") {
 		return 0;
+	}
+	else {
+		return -1;
 	}
 }
 class Rectangle :public Shape{
@@ -79,7 +83,7 @@ public:
 };
 
 int main() {
-	double r, length, width;
+	/*double r, length, width;
 	cin >> r >> length >> width;
 	Circle circle(r);
 	cout << "Circle Area:" << circle.getArea() << endl;
@@ -91,12 +95,21 @@ int main() {
 	cout << endl;
 	Square square(length);
 	cout << "Vertex count:" << square.getVertexCount() <<endl;
-	cout << endl;
+	cout << endl;*/
 
 //---------------------------------------
-	Square* s = new Square(5.5);
-	Shape* sp = new Square(6.6);
-	s = dynamic_cast<Square*>(sp);
-	cout << s->getVertexCount() << endl;
+	
+	Shape* shape = new Square(6.6);
+	Square* square = new Square(5.5);
+	square = dynamic_cast<Square*>(shape);
+	cout << "In dynamic_cast mode:"<< square->getVertexCount() << endl;
+
+	Shape* shape1 = new Rectangle(5, 4);
+	Rectangle* rectangle1 = new Rectangle(6, 7);
+	rectangle1 = typeid(Rectangle)(shape1);
+	
+
+//----------------------------------------
+	
 	return 0;
 }
