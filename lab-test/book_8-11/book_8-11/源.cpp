@@ -15,9 +15,27 @@ public:
 	}
 	virtual double getArea() = 0;
 	virtual double getPerim() = 0;
-	virtual int getVertexCount() const;
+	virtual int getVertexCount() const = 0;
 };
-int Shape::getVertexCount() const {
+
+class Rectangle :public Shape{
+private:
+	double length;
+	double width;
+	string type;
+public:
+	Rectangle(double nlength = 0, double nwidth = 0) :length(nlength), width(nwidth) {
+		type = "Rectangle";
+	}
+	double getArea() {
+		return length*width;
+	}
+	double getPerim() {
+		return 2 * (length + width);
+	}
+	int Rectangle::getVertexCount() const;
+};
+int Rectangle::getVertexCount() const {
 	if (type == "Square") {
 		return 4;
 	}
@@ -34,22 +52,6 @@ int Shape::getVertexCount() const {
 		return -1;
 	}
 }
-class Rectangle :public Shape{
-private:
-	double length;
-	double width;
-	string type;
-public:
-	Rectangle(double nlength = 0, double nwidth = 0) :length(nlength), width(nwidth) {
-		type = "Rectangle";
-	}
-	double getArea() {
-		return length*width;
-	}
-	double getPerim() {
-		return 2 * (length + width);
-	}
-};
 class Circle :public Shape{
 private:
 	double radius;
@@ -64,7 +66,25 @@ public:
 	double getPerim() {
 		return 6.28*radius;
 	}
+	int Circle::getVertexCount() const;
 };
+int Circle::getVertexCount() const {
+	if (type == "Square") {
+		return 4;
+	}
+	else if (type == "Rectangle") {
+		return 4;
+	}
+	else if (type == "Circle") {
+		return 0;
+	}
+	else if (type == "Shape") {
+		return 0;
+	}
+	else {
+		return -1;
+	}
+}
 class Square :public Rectangle {
 private:
 	double length;
@@ -79,11 +99,28 @@ public:
 	double getPerim() {
 		return 4 * length;
 	}
+	int Square::getVertexCount() const;
 
 };
-
+int Square::getVertexCount() const {
+	if (type == "Square") {
+		return 4;
+	}
+	else if (type == "Rectangle") {
+		return 4;
+	}
+	else if (type == "Circle") {
+		return 0;
+	}
+	else if (type == "Shape") {
+		return 0;
+	}
+	else {
+		return -1;
+	}
+}
 int main() {
-	/*double r, length, width;
+	double r, length, width;
 	cin >> r >> length >> width;
 	Circle circle(r);
 	cout << "Circle Area:" << circle.getArea() << endl;
@@ -95,14 +132,14 @@ int main() {
 	cout << endl;
 	Square square(length);
 	cout << "Vertex count:" << square.getVertexCount() <<endl;
-	cout << endl;*/
+	cout << endl;
 
 //---------------------------------------
 	
-	Shape* shape = new Square(6.6);
-	Square* square = new Square(5.5);
-	square = dynamic_cast<Square*>(shape);
-	cout << "In dynamic_cast mode:" << square->getVertexCount() << endl;
+	Shape* shape0 = new Square(6.6);
+	Square* square0 = new Square(5.5);
+	square0 = dynamic_cast<Square*>(shape0);
+	cout << "In dynamic_cast mode:" << square0->getVertexCount() << endl;
 
 	Shape* shape1 = new Rectangle(5, 4);
 	Rectangle* rectangle1 = new Rectangle(6, 7);
