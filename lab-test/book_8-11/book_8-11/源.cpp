@@ -102,12 +102,12 @@ int main() {
 	Shape* shape = new Square(6.6);
 	Square* square = new Square(5.5);
 	square = dynamic_cast<Square*>(shape);
-	cout << "In dynamic_cast mode:"<< square->getVertexCount() << endl;
+	cout << "In dynamic_cast mode:" << square->getVertexCount() << endl;
 
 	Shape* shape1 = new Rectangle(5, 4);
 	Rectangle* rectangle1 = new Rectangle(6, 7);
-	rectangle1 = typeid(Rectangle)(shape1);
-	//test for github
+	cout << "In typeid mode:" << typeid(rectangle1->getVertexCount()).name() << endl;
+	
 	
 
 //----------------------------------------
