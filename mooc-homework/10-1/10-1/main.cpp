@@ -39,15 +39,22 @@ Array<T>::~Array() {
 template<typename T>
 void Array<T>::sort() {
 	int min;
-	T temp;
-	for (int i = 0; i < size_ - 1; i++) {
-		min = i;
-		for (int j = i + 1; i < size_; j++) {
-			if (data_[j] < data_[min])
-				min = j;
-			temp = data_[i];
-			data_[i] = data_[min];
-			data_[min] = temp;
+	int temp;
+	int i, j;
+	T t;
+	for (i = 0; i<size_ - 1; i++)
+	{
+		temp = i;
+		for (j = i + 1; j < size_; j++)
+		{
+			if (data_[temp]>data_[j])
+				temp = j;
+		}
+		if (i != temp)
+		{
+			t = data_[temp];
+			data_[temp] = data_[i];
+			data_[i] = t;
 		}
 	}
 }
@@ -88,7 +95,8 @@ int main() {
 		vd.push_back(td);
 	}
 
-	while (cin >> tc) {
+	while (cin.get() != '\n') {
+		cin >> tc;
 		vc.push_back(tc);
 	}
 
