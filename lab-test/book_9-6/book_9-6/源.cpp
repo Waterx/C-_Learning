@@ -25,7 +25,7 @@ public:
 	T Get(int position);
 };
 //template<typename T>
-//int Linklist<T>::size = 0; //要在类外定义静态变量，不然会引起LNK2001error
+//int Linklist<T>::size = 0; //要在类外定义静态变量，不然会引起LNK2001error //本题不需要静态变量
 template<typename T>
 Node<T>* Linklist<T>::Insert(int data, int position) {
 	if (front == 0 && rear == 0) {  //if a empty list
@@ -125,7 +125,6 @@ Node<T>* OrderList<T>::insert(int data) {
 int main() {
 
 	OrderList<int> a;
-	
 	a.Insert(20, 0);
 	a.insert(50);
 	a.insert(12);
