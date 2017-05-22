@@ -78,7 +78,8 @@ void Calculator::run() {
 				enter(stringToDouble(str));
 			else
 			{
-				compute(str[0]); //????????????
+				c.push(str[0]);
+			
 			}
 			break;
 		case'+':
