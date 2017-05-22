@@ -4,8 +4,6 @@
 #include<sstream>
 #include<cmath>
 using namespace std;
-
-
 inline double stringToDouble(const string &str) {
 	istringstream stream(str);
 	double result;
@@ -72,6 +70,7 @@ void Calculator::run() {
 		switch (str[0]) {
 		case 'c':
 			s.clear();
+			c.clear();
 			break;
 		case '-':
 			if (str.size() > 1)
@@ -79,7 +78,6 @@ void Calculator::run() {
 			else
 			{
 				c.push(str[0]);
-			
 			}
 			break;
 		case'+':

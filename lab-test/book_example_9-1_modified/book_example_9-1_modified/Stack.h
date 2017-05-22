@@ -48,7 +48,7 @@ bool Stack<T, SIZE>::isFull() const {
 }
 template<typename T, int SIZE>//Çå¿ÕÕ»
 void Stack<T, SIZE>::clear() {
-	top = -2;
+	top = -1;
 }
 
 #endif // !STACK_H
