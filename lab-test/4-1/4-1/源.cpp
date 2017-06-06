@@ -7,7 +7,7 @@ private:
 	double radius_;
 public:
 	CircleGroup() {}
-	virtual double Area() = 0;    //´¿Ðéº¯Êý 
+	virtual double Area() = 0;    //´¿Ðéº¯Êý
 	virtual double Volume() = 0;
 	double getRadius() {
 		return radius_;
