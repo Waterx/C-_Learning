@@ -140,7 +140,7 @@ int Stack::WrToFile() {
 }
 int Stack::ReadfrFile() {
 	ifstream input("stack.txt");
-	if (input.fail()||Full()) {
+	if (input.fail()) {
 		return -1;
 	}
 	MakeEmpty();
@@ -273,7 +273,7 @@ int Queue::WrToFile() {
 	if (head) {
 		Node *t = head;
 		for (int i = 0; i < numOfNode; i++) {
-			output << t->data << endl;
+			output << t->data << " ";
 			t = t->next;
 		}
 		return 1;
@@ -282,7 +282,7 @@ int Queue::WrToFile() {
 }
 int Queue::ReadfrFile() {
 	ifstream input("queue.txt");
-	if (input.fail() || Full()) {
+	if (input.fail()) {
 		return -1;
 	}
 	MakeEmpty();
@@ -309,8 +309,21 @@ int main() {
 	Stack s;
 	s.Write();
 	s.Display();
+	s.WrToFile();
+	s.ReadfrFile();
+	s.Display();
+
 	Queue q;
 	q.Write();
 	q.Display();
+	q.WrToFile();
+	q.ReadfrFile();
+	q.Display();
+	//Stack s;
+	//Queue q;
+	//s.ReadfrFile();
+	//s.Display();
+	//q.ReadfrFile();
+	//q.Display();
 	return 0;
 }
