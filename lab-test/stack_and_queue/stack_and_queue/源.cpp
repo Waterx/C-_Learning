@@ -1,3 +1,5 @@
+//集中上机选题
+
 #include<iostream>
 #include<fstream>
 using namespace std;
@@ -136,6 +138,7 @@ int Stack::WrToFile() {
 		}
 		return 1;
 	}
+	output.close();
 	return 0;
 }
 int Stack::ReadfrFile() {
@@ -155,6 +158,7 @@ int Stack::ReadfrFile() {
 		if (input.eof()) break;
 		Add(x);
 	}
+	input.close();
 	return 1;
 
 }
@@ -276,6 +280,7 @@ int Queue::WrToFile() {
 			output << t->data << " ";
 			t = t->next;
 		}
+		output.close();
 		return 1;
 	}
 	return 0;
@@ -292,6 +297,7 @@ int Queue::ReadfrFile() {
 		if (input.eof()) break;
 		Add(x);
 	}
+	input.close();
 	return 1;
 }
 void Queue::Display() {
@@ -306,6 +312,7 @@ void Queue::Display() {
 }
 
 int main() {
+
 	Stack s;
 	s.Write();
 	s.Display();
