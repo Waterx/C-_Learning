@@ -6,8 +6,8 @@ using namespace std;
 class Screen {
 private:
     //----补充多个数据域成员
- 	static int width_;
- 	static int height_;
+ 	static unsigned int width_;
+ 	static unsigned int height_;
  	static Screen* instance;
     // 在Screen类中获取/释放图形窗口资源，是一种RAII方法
     //   关于RAII，可以参见异常处理单元的材料
@@ -33,10 +33,7 @@ public:
     static Screen* getInstance(unsigned int width = 640, unsigned int height = 480) {
         // 单例模式
         //----补充函数体
-        if(instance!=0) {
-        	
-        }
-        else {
+        if (instance == 0) {
         	width_ = width;
         	height_ = height;
         	instance = new Screen();
@@ -48,8 +45,8 @@ public:
  
 Screen* Screen::instance = 0;
 //----补充Screen类的特殊数据成员初始化语句
-int Screen::height_ = 0;
-int Screen::width_ = 0;
+unsigned int Screen::height_ = 0;
+unsigned int Screen::width_ = 0;
 int main() {
     int width, height;
     Screen* screen = 0;
