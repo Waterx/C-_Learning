@@ -46,41 +46,43 @@ int Screen::height_ = 0;
 int Screen::width_ = 0;
 
 int main() {
-	int width, height;
+	int width = 0, height = 0;
 	Screen* screen = 0;
-	
+	int flag = 0; 
 	//-------------------------------------------------------
 	//The following content is the 7-2 test answer
 	string file_name = "screen.txt";
 	fstream fs;
-	fs.open(file_name, ios::in | ios::out | ios::binary);
+	fs.open(file_name.c_str(), ios::in | ios::out);
 	if (fs.fail()) {
 		cout << "Can not open file in in&out mode: " << file_name << endl;
-		fs.open(file_name, ios::out | ios::binary);
+		fs.open(file_name.c_str(), ios::out);
 		fs.close();
-		fs.open(file_name, ios::in | ios::out | ios::binary);
+		fs.open(file_name.c_str(), ios::in | ios::out);
+		
 	}
-	fs << width << height;
+	fs >> width >> height;
 	if (!width || !height) {
+		cout << "No content in file, please input width and height:" << endl;
 		cin >> width >> height;
 		fs.clear();
+		flag = 1;
 	}
 	
 	screen = Screen::getInstance(width, height);
 	screen = Screen::getInstance();
-	//fs.seekp(ios::beg);
-	fs >> screen->getWidth() >> " " >> screen->getWidth();
-	if (fs.fail()) {
-		cout << "Writing to file failed" << endl;
-		return -1;
+	fs.seekp(ios::beg);
+	if (flag) {
+		fs << screen->getWidth() << " " << screen->getHeight();
+		if (fs.fail()) {
+			cout << "Writing to file failed" << endl;
+			return -1;
+		}
 	}
 	fs.seekp(ios::beg);
-	//fs <<
-
-	
-
-	cout << screen->getWidth() << " " <<
-		screen->getHeight() << endl;
+	fs >> width >> height;
+	cout << "The following content from file:" << endl;
+	cout << width << " " << height << endl;
 
 		// GCC及VC编译器在调试模式下会暂停，便于查看运行结果
 #if ( defined(__DEBUG__) || defined(_DEBUG) )
