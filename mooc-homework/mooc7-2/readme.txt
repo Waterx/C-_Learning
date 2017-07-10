@@ -1,0 +1,1 @@
+1.在Dev-C++中，要使用string直接作为filename参数的话，需要.c_str()函数转换一下
