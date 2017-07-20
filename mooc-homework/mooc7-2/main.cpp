@@ -62,7 +62,8 @@ int main() {
 		
 	}
 	fs >> width >> height;
-	if (!width || !height) {
+	//if (!width || !height) {
+	if (fs.fail()) {
 		cout << "No content in file, please input width and height:" << endl;
 		cin >> width >> height;
 		fs.clear();
