@@ -95,8 +95,7 @@ int main() {
 		vd.push_back(td);
 	}
 
-	while (cin.get() != '\n') {
-		cin >> tc;
+	while (cin >> tc) {
 		vc.push_back(tc);
 	}
 
