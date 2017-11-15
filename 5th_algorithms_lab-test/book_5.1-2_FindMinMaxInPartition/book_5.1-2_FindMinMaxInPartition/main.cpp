@@ -53,7 +53,7 @@ int main() {
 	duration = (double)(finish - start) / CLOCKS_PER_SEC;  // 统计时间duration
 	printf("\nThe CPU time is %2.6f seconds:\n", duration);
 
-	//输出结果到文件resultsMS.txt
+	//输出结果到文件results.txt
 	fp = fopen("resultsFP.txt", "w+");
 	fprintf(fp, "Time = %f\n", duration);
 	for (i = 0; i < 2000; i++) {
