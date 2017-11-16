@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #define cutoff 3
 FILE* fp;
+void InsertionSort(int* A, int N);
 
 void Swap(int& a, int& b) {
 	int tmp = a;
@@ -28,7 +29,29 @@ int Median3(int A[], int Left, int Right) {
 }
 
 void Qsort(int A[], int Left, int Right) {
+	if (Right - Left >= cutoff) {
+		int Privot = Median3(A, Left, Right);  //枢纽元
+		int i = Left;
+		int j = Right - 1;
+		
+		while (1) {
+			while (A[++i] < Privot) {}
+			while (A[--j] > Privot) {}
+			if (i < j) {
+				Swap(A[i], A[j]);
+			}
+			else
+				break;
+		}
 
+		Swap(A[i], A[Right - 1]);  //把枢纽元放回去
+
+		Qsort(A, Left, i - 1);
+		Qsort(A, i + 1, Right);
+	}
+	else {
+		InsertionSort(A, Right - Left + 1);
+	}
 }
 
 void QuickSort(int A[], int N) {
@@ -36,7 +59,7 @@ void QuickSort(int A[], int N) {
 }
 
 // 插入排序，处理N<20时比快速排序快，处理小数组排序
-void InsertionSort(int A[], int N) {
+void InsertionSort(int* A, int N) {
 	int i, j, tmp;
 	for (i = 1; i < N; i++) {
 		tmp = A[i];
@@ -47,7 +70,6 @@ void InsertionSort(int A[], int N) {
 			if (j == 0) break;
 		}
 		Swap(A[j], tmp);
-
 	}
 }
 
@@ -55,12 +77,7 @@ void InsertionSort(int A[], int N) {
 
 int main() {
 
-	//设置计时开始
-	double duration;
-	clock_t  finish, start;
-	start = clock();
-
-	//------以下实现了一行行读取数据-------
+	//读取数据
 	int array[2000];
 	int i = 0;
 	fp = fopen("data.txt", "r");
@@ -71,21 +88,26 @@ int main() {
 	}
 	fclose(fp);
 
+	//设置计时开始
+	double duration;
+	clock_t  finish, start;
+	start = clock();
+
 	//运行快速排序
-	InsertionSort(array, 2000);
-	//QuickSort(array, 2000);
+	//InsertionSort(array, 2000);
+	QuickSort(array, 2000);
 
 	//设置计时结束
 	finish = clock();
 	duration = (double)(finish - start) / CLOCKS_PER_SEC;  // 统计时间duration
 	printf("\nThe CPU time is %2.6f seconds:\n", duration);
 
-	//输出结果到文件resultsMS.txt
-	fp = fopen("resultsMS.txt", "w+");
-	fprintf(fp, "TimeMS = %f\n", duration);
+	//输出结果到文件resultsQS.txt
+	fp = fopen("resultsQS.txt", "w+");
+	fprintf(fp, "TimeQS = %f\n", duration);
 	for (i = 0; i < 2000; i++) {
 		fprintf(fp, "%d\n", array[i]);
-		printf("%d\n", array[i]);
+		printf("%d     %d\n", i, array[i]);
 	}
 	return 0;
 
