@@ -2,9 +2,12 @@
 #include<stdlib.h>
 #include<time.h>
 FILE* fp;
-void Merge(int A[], int tmp[], int leftstart, int rightend) {
-	//find the min num
-	for (int i = leftstart; i < rightend; i++) {
+void Find(int A[], int tmp[], int leftstart, int rightend) {
+	//find the min and max num
+	if (rightend - leftstart > 2) {
+		return;
+	}
+	for (int i = leftstart; i <= rightend; i++) {
 		if (A[i] < tmp[0]) {
 			tmp[0] = A[i];
 		}
@@ -13,26 +16,21 @@ void Merge(int A[], int tmp[], int leftstart, int rightend) {
 		}
 	}
 }
-void Find(int A[], int tmp[], int Left, int Right) {
+void Part(int A[], int tmp[], int Left, int Right) {
 	int Center;
 	if (Left < Right) {
 		Center = (Left + Right) / 2;
-		Find(A, tmp, Left, Center);
-		Find(A, tmp, Center + 1, Right);
-		Merge(A, tmp, Left, Right);
+		Part(A, tmp, Left, Center);
+		Part(A, tmp, Center + 1, Right);
+		Find(A, tmp, Left, Right);
 	}
 }
 void FindPartition(int A[], int N) {
 	int tmp[2] = { A[0], A[1] };  //[0] is the temp min num, [1] is the temp max num
-	Find(A, tmp, 0, N - 1);
+	Part(A, tmp, 0, N - 1);
 	printf("Min : %d, Max : %d", tmp[0], tmp[1]);
 }
 int main() {
-
-	//设置计时开始
-	double duration;
-	clock_t  finish, start;
-	start = clock();
 
 	//------以下实现了一行行读取数据-------
 	int array[2000];
@@ -44,6 +42,11 @@ int main() {
 		array[i++] = atoi(line);
 	}
 	fclose(fp);
+
+	//设置计时开始
+	double duration;
+	clock_t  finish, start;
+	start = clock();
 
 	//运行归并查找
 	FindPartition(array, 2000);
