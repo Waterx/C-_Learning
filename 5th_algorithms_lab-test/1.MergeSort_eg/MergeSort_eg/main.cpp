@@ -60,11 +60,6 @@ void Merge(int A[], int tmp[], int lp, int rp, int right_end) {
 
 int main() {
 
-	//设置计时开始
-	double duration;
-	clock_t  finish, start;
-	start = clock();
-
 	//------以下实现了一行行读取数据-------
 	int array[2000];
 	int i = 0;
@@ -75,6 +70,11 @@ int main() {
 		array[i++] = atoi(line);
 	}
 	fclose(fp);
+
+	//设置计时开始
+	double duration;
+	clock_t  finish, start;
+	start = clock();
 
 	//运行归并排序
 	MergeSort(array, 2000);

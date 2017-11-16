@@ -5,11 +5,6 @@ FILE* fp;
 
 int main() {
 
-	//设置计时开始
-	double duration;
-	clock_t  finish, start;
-	start = clock();
-
 	//读取数据
 	int array[2000];
 	int i = 0;
@@ -20,6 +15,11 @@ int main() {
 		array[i++] = atoi(line);
 	}
 	fclose(fp);
+	
+	//设置计时开始
+	double duration;
+	clock_t  finish, start;
+	start = clock();
 
 	//运行XXXXXXX
 	
