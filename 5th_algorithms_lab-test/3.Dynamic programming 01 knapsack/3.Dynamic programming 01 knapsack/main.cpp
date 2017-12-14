@@ -16,7 +16,7 @@ int main() {
 	int x[5] = { 0 };
 
 	for (int j = 0; j < c; j++) {
-		if (j - w[n - 1] + 1 >= 0)
+		if (1 + j - w[n - 1] >= 0)
 			m[n - 1][j] = v[n - 1];
 		else
 			m[n - 1][j] = 0;
@@ -24,7 +24,7 @@ int main() {
 	//依次求解m[i][j],0<=i<n,0<=j<=c
 	for (int i = n - 2; i >= 0; i--) {
 		for (int j = 0; j < c; j++) {
-			if (j < w[i])
+			if (j + 1< w[i])
 				m[i][j] = m[i + 1][j];
 			else
 				m[i][j] = max(m[i + 1][j], m[i + 1][j - w[i]] + v[i]);
@@ -32,9 +32,9 @@ int main() {
 	}
 
 	//求x[i]，从m[1][c]开始
-	int j = c;
+	int j = c - 1;
 	int i = 0;
-	for (i = 0; i < n; i++) {
+	for (i = 0; i < n - 1; i++) {
 		if (m[i][j] == m[i + 1][j]) {
 			x[i] = 0;
 		}
@@ -44,10 +44,10 @@ int main() {
 		}
 	}
 
-	if (m[i][j]>0)
-		x[n] = 1;
+	if (m[i][j] > 0)
+		x[i] = 1;
 	else
-		x[n] = 0;
+		x[i] = 0;
 
 
 	return 0;
